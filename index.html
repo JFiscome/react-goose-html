@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>amidrajk - 以简约，见真我</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#2e2e2e",
+              secondary: "#5a5a5a",
+              accent: "#d1d1cf",
+              background: "#f9f9f9",
+            },
+            fontFamily: {
+              sans: ["Noto Sans SC", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Noto Sans SC", sans-serif;
+      }
+      .scroll-hide::-webkit-scrollbar {
+        display: none;
+      }
+      .scroll-hide {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+    </style>
+    <script type="importmap">
+      {
+        "imports": {
+          "react/": "https://esm.sh/react@^19.2.3/",
+          "react": "https://esm.sh/react@^19.2.3",
+          "lucide-react": "https://esm.sh/lucide-react@^0.562.0",
+          "react-router-dom": "https://esm.sh/react-router-dom@^7.12.0",
+          "react-dom/": "https://esm.sh/react-dom@^19.2.3/"
+        }
+      }
+    </script>
+  </head>
+  <body class="bg-gray-50 text-gray-900">
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>

@@ -1,0 +1,7 @@
+{
+  "name": "大鹅故乡 (Daegoose Hometown) Official Website",
+  "description": "A professional and premium corporate website for 'Daegoose Hometown', a brand specializing in outdoor winter apparel. Features product browsing, brand storytelling, and integration with Tmall for seamless purchasing.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}
