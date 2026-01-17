@@ -19,11 +19,6 @@ const Home: React.FC = () => {
 
   const slides = [
     {
-      image: "/cms/goose/ads/shop.jpg",
-      title: "",
-      subtitle: "探访线下门店",
-    },
-    {
       image: "/cms/goose/ads/7.jpg",
       title: "以简约，见真我",
       subtitle: "amidrajk / 简约即真实",
