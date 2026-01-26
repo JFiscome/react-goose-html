@@ -9,12 +9,12 @@ import React, { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import ProductCard from "../components/ProductCard";
 import { products as allProducts } from "../data";
-import { Attribute, Category } from "../types";
+import { Category } from "../types";
 
 const ProductCenter: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [activeCategory, setActiveCategory] = useState<string>("店铺精选");
-  const [activeAttr, setActiveAttr] = useState<string>("全部");
+
   const [sortBy, setSortBy] = useState<string>("默认");
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -25,13 +25,10 @@ const ProductCenter: React.FC = () => {
   }, [searchParams]);
 
   const filteredProducts = useMemo(() => {
-    let result = [...allProducts];
+    let result = [...allProducts].filter(Boolean);
 
     if (activeCategory !== "店铺精选") {
       result = result.filter((p) => p.category === activeCategory);
-    }
-    if (activeAttr !== "全部") {
-      result = result.filter((p) => p.attribute === activeAttr);
     }
 
     if (searchQuery) {
@@ -58,7 +55,7 @@ const ProductCenter: React.FC = () => {
     }
 
     return result;
-  }, [activeCategory, activeAttr, sortBy, searchQuery]);
+  }, [activeCategory, sortBy, searchQuery]);
 
   return (
     <div className="pt-24 pb-20 min-h-screen bg-white">
@@ -104,32 +101,9 @@ const ProductCenter: React.FC = () => {
                 </div>
               </div>
 
-              {/* Attributes */}
-              <div className="mb-8">
-                <h4 className="text-xs font-bold text-gray-900 mb-4 uppercase tracking-widest">
-                  属性
-                </h4>
-                <div className="flex flex-wrap gap-2">
-                  {["全部", ...Object.values(Attribute)].map((attr) => (
-                    <button
-                      key={attr}
-                      onClick={() => setActiveAttr(attr)}
-                      className={`text-xs px-3 py-1.5 border transition-all ${
-                        activeAttr === attr
-                          ? "bg-black border-black text-white"
-                          : "border-gray-200 text-gray-500 hover:border-black hover:text-black"
-                      }`}
-                    >
-                      {attr}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
               <button
                 onClick={() => {
                   setActiveCategory("店铺精选");
-                  setActiveAttr("全部");
                   setSearchQuery("");
                 }}
                 className="w-full py-3 text-xs text-gray-400 hover:text-black transition-colors border-t border-gray-100 pt-4 uppercase tracking-widest"
@@ -208,7 +182,6 @@ const ProductCenter: React.FC = () => {
                 <button
                   onClick={() => {
                     setActiveCategory("店铺精选");
-                    setActiveAttr("全部");
                   }}
                   className="mt-6 text-black text-xs font-bold uppercase tracking-widest hover:underline"
                 >

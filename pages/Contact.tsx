@@ -65,7 +65,7 @@ const Contact: React.FC = () => {
                       <h5 className="font-bold text-black mb-1 text-sm uppercase tracking-widest">
                         邮箱
                       </h5>
-                      <p className="text-gray-500 mb-1">hello@amidrajk.com</p>
+                      <p className="text-gray-500 mb-1">amidrajk@163.com</p>
                       <span className="text-xs text-gray-400 font-medium">
                         24小时内回复
                       </span>
@@ -80,7 +80,9 @@ const Contact: React.FC = () => {
                       <h5 className="font-bold text-black mb-1 text-sm uppercase tracking-widest">
                         地址
                       </h5>
-                      <p className="text-gray-500">广州市天河区创意产业园A栋</p>
+                      <p className="text-gray-500">
+                        福建省福州市仓山区科技园A栋
+                      </p>
                     </div>
                   </div>
                 </div>

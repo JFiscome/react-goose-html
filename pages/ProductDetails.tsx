@@ -14,7 +14,8 @@ import { products } from "../data";
 
 const ProductDetails: React.FC = () => {
   const { id } = useParams();
-  const product = products.find((p) => p.id === id);
+  // Filter out any undefined products that might exist in data
+  const product = products.filter(Boolean).find((p) => p?.id === id);
   const [activeImg, setActiveImg] = useState(0);
 
   useEffect(() => {
@@ -117,14 +118,6 @@ const ProductDetails: React.FC = () => {
               </p>
 
               <div className="space-y-8 mb-12 border-t border-b border-gray-100 py-8">
-                <div className="flex items-center gap-8">
-                  <span className="text-xs font-bold text-black uppercase tracking-widest w-16">
-                    面料
-                  </span>
-                  <span className="text-sm text-gray-600 font-light">
-                    {product.material}
-                  </span>
-                </div>
                 <div className="flex items-center gap-8">
                   <span className="text-xs font-bold text-black uppercase tracking-widest w-16">
                     颜色
@@ -254,12 +247,12 @@ const ProductDetails: React.FC = () => {
                 </h3>
                 <div className="grid grid-cols-2 gap-4">
                   <img
-                    src="/cms/goose/ads/7.jpg"
+                    src="/ads/7.jpg"
                     alt="Detail 1"
                     className="w-full transition-all duration-700"
                   />
                   <img
-                    src="/cms/goose/ads/8.jpg"
+                    src="/ads/8.jpg"
                     alt="Detail 2"
                     className="w-full transition-all duration-700"
                   />

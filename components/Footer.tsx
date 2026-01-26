@@ -95,7 +95,7 @@ const Footer: React.FC = () => {
                   className="text-gray-600 group-hover:text-white transition-colors"
                 />
                 <span className="group-hover:text-white transition-colors">
-                  hello@amidrajk.com
+                  amidrajk@163.com
                 </span>
               </li>
               <li className="flex items-start space-x-4 group">
@@ -104,9 +104,9 @@ const Footer: React.FC = () => {
                   className="text-gray-600 group-hover:text-white transition-colors"
                 />
                 <span className="group-hover:text-white transition-colors leading-relaxed">
-                  广州市天河区
+                  福建省福州市仓山区
                   <br />
-                  创意产业园A栋
+                  科技园A栋
                 </span>
               </li>
             </ul>

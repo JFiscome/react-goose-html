@@ -2,12 +2,13 @@ import {
   ArrowRight,
   ChevronLeft,
   ChevronRight,
+  Play,
   ShieldCheck,
   Star,
   Users,
   Zap,
 } from "lucide-react";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import ProductCard from "../components/ProductCard";
 import { products } from "../data";
@@ -16,20 +17,22 @@ import { Category } from "../types";
 const Home: React.FC = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const location = useLocation();
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isPlaying, setIsPlaying] = useState(true);
 
   const slides = [
     {
-      image: "/cms/goose/ads/7.jpg",
+      image: "/ads/7.jpg",
       title: "以简约，见真我",
       subtitle: "amidrajk / 简约即真实",
     },
     {
-      image: "/cms/goose/ads/8.jpg",
+      image: "/ads/8.jpg",
       title: "少即是多，简而不凡",
       subtitle: "美学的减法",
     },
     {
-      image: "/cms/goose/ads/1.jpg",
+      image: "/ads/1.jpg",
       title: "克制即高级",
       subtitle: "高级始于克制",
     },
@@ -138,7 +141,7 @@ const Home: React.FC = () => {
                   <h4 className="text-lg font-bold text-black mb-1">
                     正品保障
                   </h4>
-                  <p className="text-xs text-gray-500">官方直营 假一赔十</p>
+                  <p className="text-xs text-gray-500">官方直营，退货无忧</p>
                 </div>
               </div>
               <div className="flex flex-col items-center text-center space-y-3 pt-8 md:pt-0">
@@ -179,12 +182,53 @@ const Home: React.FC = () => {
         </div>
       </section>
 
+      {/* Brand Video Show */}
+      <section
+        className="w-full bg-black overflow-hidden relative group cursor-pointer"
+        onClick={() => {
+          if (videoRef.current) {
+            if (videoRef.current.paused) {
+              videoRef.current.play();
+              setIsPlaying(true);
+            } else {
+              videoRef.current.pause();
+              setIsPlaying(false);
+            }
+          }
+        }}
+      >
+        <video
+          ref={videoRef}
+          className="w-full h-[50vh] md:h-[85vh] object-cover"
+          autoPlay
+          loop
+          muted
+          playsInline
+          src="/videos/show.mp4"
+          onPlay={() => setIsPlaying(true)}
+          onPause={() => setIsPlaying(false)}
+        >
+          您的浏览器不支持视频播放。
+        </video>
+
+        {/* Play Button Overlay */}
+        {!isPlaying && (
+          <div className="absolute inset-0 flex items-center justify-center z-10 bg-black/30">
+            <div className="w-16 h-16 md:w-24 md:h-24 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center border border-white/50 transition-transform hover:scale-110">
+              <Play className="text-white fill-white ml-1" size={32} />
+            </div>
+          </div>
+        )}
+
+        <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-black/50 to-transparent pointer-events-none" />
+      </section>
+
       {/* 6. Offline Store - Shop Image (Moved) */}
       <section id="offline-store" className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="relative aspect-[21/9] overflow-hidden group">
             <img
-              src="/cms/goose/ads/shop.jpg"
+              src="/ads/shop.jpg"
               alt="Offline Store"
               className="w-full h-full object-cover transition-all duration-1000"
             />
@@ -223,7 +267,7 @@ const Home: React.FC = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-12">
-            {products.slice(0, 3).map((product) => (
+            {products.slice(0, 6).map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
           </div>
@@ -236,7 +280,7 @@ const Home: React.FC = () => {
           <div className="grid lg:grid-cols-2 gap-20 items-center">
             <div className="relative aspect-[4/5] bg-gray-100 overflow-hidden">
               <img
-                src="/cms/goose/ads/2.jpg"
+                src="/ads/2.jpg"
                 alt="Design Philosophy"
                 className="w-full h-full object-cover transition-all duration-1000"
               />
@@ -283,7 +327,7 @@ const Home: React.FC = () => {
             <div className="group cursor-pointer">
               <div className="overflow-hidden mb-6 aspect-[3/4]">
                 <img
-                  src="/cms/goose/ads/3.jpg"
+                  src="/ads/3.jpg"
                   alt="Urban Minimalist"
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
@@ -298,7 +342,7 @@ const Home: React.FC = () => {
             <div className="group cursor-pointer">
               <div className="overflow-hidden mb-6 aspect-[3/4]">
                 <img
-                  src="/cms/goose/ads/4.jpg"
+                  src="/ads/4.jpg"
                   alt="Texture & Form"
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
@@ -313,7 +357,7 @@ const Home: React.FC = () => {
             <div className="group cursor-pointer">
               <div className="overflow-hidden mb-6 aspect-[3/4]">
                 <img
-                  src="/cms/goose/ads/5.jpg"
+                  src="/ads/5.jpg"
                   alt="Timeless Classics"
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
@@ -337,17 +381,17 @@ const Home: React.FC = () => {
               {
                 cat: Category.RECOMMEND,
                 name: "SILHOUETTE",
-                img: "/cms/goose/products/pro-1.jpg", // Minimalist top
+                img: "/products/pro-1.jpg", // Minimalist top
               },
               {
                 cat: Category.HOT,
                 name: "STRUCTURE",
-                img: "/cms/goose/ads/6.jpg", // Minimalist pants
+                img: "/ads/6.jpg", // Minimalist pants
               },
               {
                 cat: Category.NEW,
                 name: "OBJECTS",
-                img: "/cms/goose/ads/5.jpg", // Minimalist simple accessory
+                img: "/ads/5.jpg", // Minimalist simple accessory
               },
             ].map((item, i) => (
               <Link
